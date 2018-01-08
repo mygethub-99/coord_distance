@@ -14,6 +14,6 @@ def makesites():
         line_split=contents[line].split()
         #print (line_split)
         sitedict[line_split[0]]=line_split[1],line_split[2]
-
+    print (sitedict)
     return sitedict
 makesites()
