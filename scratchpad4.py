@@ -1,34 +1,44 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jan  9 15:49:47 2018
-
+Creates a nested Dictionary of distances between each psap and all sites
 @author: owen
 """
 from geopy.distance import vincenty
-getpsap = {1: ('32.458', '87.4220'), 2:('33.231', '87.3210')}
-getsites= {1: ('34.458', '85.4220'), 2:('31.231', '83.3210')}
+from process_psap import makepsap as psap
+from latlongwork import makesites as sites
+import operator
+
+getpsap = psap()
+getsites = sites()
 psap_dict = {}
+swap_list = []
 p = len(getpsap)
 if p > 0:
     for k in getpsap:
         psap_locate = getpsap[k]
         x = len(getsites)
+        p=p-1
                 
         while x > 0:
             for s in getsites:
                 site_locate = getsites[s]
                 dis=round(vincenty(psap_locate, site_locate).miles)
                 x = x-1
-                sl = (k,s,dis)
-                if not psap_dict:
-                    psap_dict[sl[0]] = {'Site':sl[1], 'Distance':sl[2]}
-                else:
-                    tempdict = {sl[]}
+                swap_list = [k, s, dis]
+                try:
+                    psap_dict[swap_list[0]][swap_list[1]] = {'Distance':swap_list[2]}
+                except:
+                    psap_dict[swap_list[0]] = {}
+                    psap_dict[swap_list[0]][swap_list[1]] = {'Distance':swap_list[2]}
                     
-                
+               
+                    
+                s
                 
     else:
-        print (psap_dist)
+        print ("Big Dictionary!")
+        
             
                 
     
