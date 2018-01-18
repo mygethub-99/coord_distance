@@ -11,31 +11,51 @@ from latlongwork import makesites as sites
 getpsap = psap()
 getsites = sites()
 
-swap_list = []
 p = len(getpsap)
 f = open("testfile.txt", "a+")
 f.write("Distance between Psap and all sites")
 f.write("\n")
+mklist = []
 if p > 0:
     for k in getpsap:
         psap_locate = getpsap[k]
         x = len(getsites)
-        p=p-1
+        p = p-1
                 
         while x > 0:
+            temp = []
             for s in getsites:
                 site_locate = getsites[s]
-                dis=round(vincenty(psap_locate, site_locate).miles)
+                dis = round(vincenty(psap_locate, site_locate).miles)
                 x = x-1
-                swap_list = (k, s, dis)
-                swap_list = list(map(int,swap_list))
-                swap_list=str(swap_list).strip('[]')
-                f.write(swap_list)
-                f.write("\n")
+                ut = (k, s, dis)
+                temp.insert(0,ut)
+                if x < 1:
+                    sl = sorted(temp, key=lambda tup: (tup[2]))
+                    mklist.insert(0,sl[0])
+                
+                #blank = list(map(int,swap_list))
+                #swap_list=str(swap_list).strip('[]')
+                #f.write(swap_list)
+                #f.write("\n")
+        
                     
     else:
-        print ("Big Dictionary!")
+        print (mklist)
+        #list(map(int, mklist))
+        #str(mklist).strip('[]')
+        #f.write(mklist)
+        #f.write("\n")
+        
+        with open('output.txt', 'w') as file_handler:
+            for item in mklist:
+                file_handler.write("{}\n".format(item))
+
+        
+        file_handler.close()
         f.close()
+
+
         
         
             
