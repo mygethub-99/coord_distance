@@ -2,18 +2,19 @@
 #Dictionary with the usid as the key and the lat and long as the value
 
 def makesites():
-    filename = 'siteslatlong.txt'
-    fopen1 = open(filename, 'r')
-    contents = fopen1.readlines()
-    fopen1.close()
-    
-
+    fopen = open('book2.txt')
+    contents = fopen.readlines()
+    fopen.close()
     sitedict={}
-
-    for line in range(1, len(contents)):
-        line_split=contents[line].split()
-        #print (line_split)
-        sitedict[line_split[0]]=line_split[1],line_split[2]
-    print (sitedict)
-    return sitedict
+    
+    try:
+        for line in range(1, len(contents)):
+            line_split=contents[line].split()
+            sitedict[line_split[0]]=line_split[1],line_split[2]
+    except:
+        for line in range(1, (len(contents))-1):
+            line_split=contents[line].split()
+            sitedict[line_split[0]]=line_split[1],line_split[2]
+        
+    return (sitedict)
 makesites()
