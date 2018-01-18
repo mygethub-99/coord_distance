@@ -2,11 +2,13 @@
 #Dictionary with the usid as the key and the lat and long as the value
 
 def makesites():
-    fopen = open('book2.txt')
+    fopen = open('siteslatlong.txt')
     contents = fopen.readlines()
     fopen.close()
-    sitedict={}
-    
+    sitedict = {}
+
+#Using try and except to deal with "index exception" error caused by len function
+#Except will subtract 1 from value of len(contents)     
     try:
         for line in range(1, len(contents)):
             line_split=contents[line].split()

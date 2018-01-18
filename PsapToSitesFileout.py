@@ -13,8 +13,10 @@ getsites = sites()
 
 swap_list = []
 p = len(getpsap)
-f = open("testfile.txt", "a+")
-f.write("Distance between Psap and all sites")
+f = open("PsapToAllSites.txt", "w")
+f.write("Distance between PSAP and all sites")
+f.write("\n"*2)
+f.write("PSAP, SiteID, Distance")
 f.write("\n")
 if p > 0:
     for k in getpsap:
@@ -25,16 +27,16 @@ if p > 0:
         while x > 0:
             for s in getsites:
                 site_locate = getsites[s]
-                dis=round(vincenty(psap_locate, site_locate).miles)
+                dis=round(vincenty(psap_locate, site_locate).miles, 2)
                 x = x-1
                 swap_list = (k, s, dis)
-                swap_list = list(map(int,swap_list))
-                swap_list=str(swap_list).strip('[]')
+                #swap_list = list(map(int,swap_list))
+                swap_list = str(swap_list).strip('()')
+                swap_list = swap_list.replace("'", "")
                 f.write(swap_list)
                 f.write("\n")
                     
     else:
-        print ("Big Dictionary!")
         f.close()
         
         
