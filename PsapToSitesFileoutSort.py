@@ -4,7 +4,7 @@ Created on Tue Jan  9 15:49:47 2018
 Creates a .txt file of distances between each psap and closes site
 @author: owen
 """
-from geopy.distance import vincenty
+from geopy.distance import geodesic
 from process_psap import makepsap as psap
 from latlongwork import makesites as sites
 
@@ -27,7 +27,7 @@ if p > 0:
             temp = []
             for s in getsites:
                 site_locate = getsites[s]
-                dis = round(vincenty(psap_locate, site_locate).miles, 2)
+                dis = round(geodesic(psap_locate, site_locate).miles, 2)
                 x = x-1
                 ut = (k, s, dis)
                 temp.insert(0,ut)
